@@ -11,7 +11,16 @@ namespace stringify {
         }
     }
 
-    function stringifyObject(value: { [key: string]: any }): string {
+    function stringifyObject(value: object): string {
+        if (Array.isArray(value)) return stringifyArray(value as any[]);
+        return stringifyRealObject(value as {[key: string]: any});
+    }
+
+    function stringifyArray(value: any[]): string {
+        return "";
+    }
+
+    function stringifyRealObject(value: {[key: string]: any}): string {
         let result = "{";
         let keys = Object.keys(value);
         let key: string;
