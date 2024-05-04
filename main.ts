@@ -2,7 +2,6 @@
 namespace stringify {
     function stringify(value: any): string {
         switch(typeof value) {
-            case "number": return `${value}`;
             case "object": return stringifyObject(value);
             case "function": return "<method>";
             default: return JSON.stringify(value);
