@@ -2,12 +2,10 @@
 namespace stringify {
     function stringify(value: any): string {
         switch(typeof value) {
-            case "number": return value.toString();
-            case "boolean": return value ? "true" : "false";
+            case "number": return `${value}`;
             case "object": return stringifyObject(value);
             case "function": return "<method>";
-            case "undefined": return "undefined";
-            default: return value as string;
+            default: return JSON.stringify(value);
         }
     }
 
@@ -17,7 +15,14 @@ namespace stringify {
     }
 
     function stringifyArray(value: any[]): string {
-        return "";
+        let result = "[";
+        
+        for (let i = 0; i < value.length; i++) {
+            result += stringify(value[i]);
+            if (i < value.length - 1) result += ", ";
+        }
+        result += "]";
+        return result;
     }
 
     function stringifyRealObject(value: {[key: string]: any}): string {
@@ -27,7 +32,7 @@ namespace stringify {
 
         for (let i = 0; i < keys.length; i++) {
             key = keys[i];
-            result += `${key}: ${value[key]}`;
+            result += `${key}: ${stringify(value[key])}`;
             if (i < keys.length - 1) result += ", ";
         }
         result += "}"
