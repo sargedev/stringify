@@ -1,9 +1,14 @@
 
 namespace text {
     
+    /**
+     * Convert any object to string
+     * @param value Value to stringify
+     * @returns Stringified value
+     */
     //% blockId=text_stringify
     //% block="convert $value to string"
-    function stringify(value: any): string {
+    export function stringify(value: any): string {
         switch(typeof value) {
             case "object": return stringifyObject(value);
             case "function": return "<method>";
