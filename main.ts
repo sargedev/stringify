@@ -17,12 +17,6 @@ namespace text {
     }
 
     function stringifyObject(value: object): string {
-        try {
-            return (value as any).toString();
-        } catch (e) {
-            // continue execution
-        }
-
         if (Array.isArray(value)) return stringifyArray(value as any[]);
         return stringifyRealObject(value as {[key: string]: any});
     }
